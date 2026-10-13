@@ -33,70 +33,42 @@
 
 ## 安装方式
 
-### 1. 获取源码
+### 在桌面端通过 GitHub 链接安装（推荐）
 
-克隆本项目：
+1. 打开 **DeepSeek Harness Desktop**，进入侧栏的「**插件**」。
+2. 点击「**添加插件**」，在包名输入框中粘贴本项目的 GitHub 仓库地址：
+
+   ```text
+   https://github.com/Jeffry-Z/dsh-plugin-archived-sessions
+   ```
+
+3. 点击「**安装**」，等待安装完成后点击「**立即启用**」。如果直接关闭了安装窗口，可在已安装插件列表中开启本插件。
+4. **完全退出并重新打开 DSH**，进入「**设置 → 归档会话**」使用。
+
+无需手动克隆代码、执行安装命令或编辑 profile 配置。完整重启可让插件从会话创建或恢复阶段开始捕获生命周期句柄；只关闭对话或窗口不一定会停止后端。
+
+### 更新与卸载
+
+DSH `0.2.0-rc.2` 暂不支持插件自动更新。升级时，在「插件」中卸载 `dsh-plugin-archived-sessions`，再用上面的 GitHub 地址重新安装、启用，并完全重启 DSH。
+
+卸载时，在「插件」中选择本插件并点击「卸载」。卸载不会恢复已删除的对话，也不会移除运行时的删除记录。
+
+### 开发时安装本地源码
+
+需要修改源码时，可克隆本项目：
 
 ```sh
 git clone https://github.com/Jeffry-Z/dsh-plugin-archived-sessions.git
 cd dsh-plugin-archived-sessions
 ```
 
-请将源码目录放在固定位置，后续安装会直接链接到它。插件目录内无需构建或安装依赖。
-
-### 2. 初始化桌面配置
-
-至少打开一次 DeepSeek Harness Desktop，使其初始化桌面 profile，然后**完全退出应用**。只关闭对话或窗口不一定会停止后端。
-
-### 3. 使用桌面版命令安装
-
-在克隆的目录中，使用 **DeepSeek Harness Desktop 安装的 `dsh` 命令**：
+至少打开一次 DSH Desktop，使其初始化桌面 profile，然后完全退出应用。在源码目录中，使用 **DeepSeek Harness Desktop 安装的 `dsh` 命令**：
 
 ```sh
 dsh plugin --profile desktop add "link:$PWD"
 ```
 
-此命令会将本地插件安装到桌面 profile，并登记其 bundle。npm 发行的 `dsh` 命令不能管理 `desktop` profile；请使用桌面版命令，或采用下面的手动安装方式。
-
-### 手动安装
-
-如果桌面版命令不可用，在 DSH 完全退出后编辑 `~/.dsh/profiles/desktop/package.json`。若配置了 `DSH_HOME`，请以该目录替代 `~/.dsh`。
-
-将以下内容合并到现有配置中，保留其他依赖及 bundle：
-
-1. 在 `dependencies` 中加入插件，路径必须是源码目录的**绝对路径**：
-
-   ```json
-   "dsh-plugin-archived-sessions": "link:/absolute/path/dsh-plugin-archived-sessions"
-   ```
-
-2. 在现有 `dsh.profile.bundles` 数组末尾加入 `"dsh-plugin-archived-sessions"`。
-
-随后使用 pnpm 安装 profile 依赖：
-
-```sh
-pnpm --dir "$HOME/.dsh/profiles/desktop" install
-```
-
-自定义了 `DSH_HOME` 时，请相应调整路径。此方式需要本机已有 pnpm。源码安装建议使用 `link:`；移动或删除源码目录会使 profile 中的链接失效。
-
-### 4. 重启并打开管理页面
-
-重新启动 DSH，进入「设置 → 归档会话」。必须完整重启，让插件从会话创建或恢复阶段开始捕获生命周期句柄。
-
-更新链接安装的插件时，在源码目录拉取最新代码，然后完全退出并重新打开 DSH：
-
-```sh
-git pull --ff-only
-```
-
-卸载时，先完全退出 DSH，再使用桌面版命令：
-
-```sh
-dsh plugin --profile desktop remove dsh-plugin-archived-sessions
-```
-
-卸载不会恢复已删除的对话，也不会移除运行时的删除记录。
+npm 发行的 `dsh` 命令不能管理 `desktop` profile。请将源码目录放在固定位置，profile 会直接链接到它。插件目录内无需构建或安装依赖。安装或修改源码后，请完整重启 DSH；更新本地链接安装时，执行 `git pull --ff-only` 后重启即可。
 
 ## 实现方式
 

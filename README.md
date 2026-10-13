@@ -33,70 +33,42 @@ Other DSH versions, platforms and persistence backends have not been validated. 
 
 ## Installation
 
-### 1. Obtain the source
+### Install from GitHub in Desktop (recommended)
 
-Clone this repository:
+1. Open **DeepSeek Harness Desktop** and select **Plugins** in the sidebar.
+2. Click **Add plugin** and paste this repository URL into the package input:
+
+   ```text
+   https://github.com/Jeffry-Z/dsh-plugin-archived-sessions
+   ```
+
+3. Click **Install** and wait for it to finish, then click **Enable now**. If you close the dialog instead, enable the plugin from the installed plugins list.
+4. **Fully quit and reopen DSH**, then open **Settings → Archived sessions**.
+
+No manual clone, command-line installation or profile editing is needed. A full restart lets the plugin capture session lifecycle handles from creation or resume; closing a conversation or window alone does not necessarily stop its backend.
+
+### Update and uninstall
+
+DSH `0.2.0-rc.2` does not automatically update installed plugins. To update, uninstall `dsh-plugin-archived-sessions` from **Plugins**, install it again using the GitHub URL above, enable it, and fully restart DSH.
+
+To remove the plugin, select it in **Plugins** and click **Uninstall**. Uninstalling does not restore deleted conversations or remove runtime deletion records.
+
+### Install a local checkout for development
+
+For source changes, clone this repository:
 
 ```sh
 git clone https://github.com/Jeffry-Z/dsh-plugin-archived-sessions.git
 cd dsh-plugin-archived-sessions
 ```
 
-Keep this directory in a permanent location: the installation below links to it directly. No build or dependency installation is needed inside the plugin directory.
-
-### 2. Initialize the Desktop profile
-
-Open DeepSeek Harness Desktop at least once, then **fully quit the application**. Closing a conversation or window alone does not necessarily stop its backend.
-
-### 3. Install using the Desktop command
-
-Use the `dsh` command installed by **DeepSeek Harness Desktop**, from the cloned directory:
+Open DSH Desktop at least once to initialize its profile, then fully quit it. From the checkout, use the `dsh` command installed by **DeepSeek Harness Desktop**:
 
 ```sh
 dsh plugin --profile desktop add "link:$PWD"
 ```
 
-This installs the local package into the Desktop profile and registers its bundle. The npm-distributed `dsh` command cannot manage the `desktop` profile; use the Desktop-installed command or the manual option below.
-
-### Manual installation
-
-If the Desktop command is unavailable, edit `~/.dsh/profiles/desktop/package.json` while DSH is fully quit. If `DSH_HOME` is configured, use that directory instead of `~/.dsh`.
-
-Merge these entries into the existing manifest, preserving all other dependencies and bundle names:
-
-1. Add the local dependency to `dependencies`, using the **absolute path** to this repository:
-
-   ```json
-   "dsh-plugin-archived-sessions": "link:/absolute/path/dsh-plugin-archived-sessions"
-   ```
-
-2. Append `"dsh-plugin-archived-sessions"` to the existing `dsh.profile.bundles` array.
-
-Then use pnpm to install the profile dependencies:
-
-```sh
-pnpm --dir "$HOME/.dsh/profiles/desktop" install
-```
-
-Adjust the path if you use a custom `DSH_HOME`. This fallback requires pnpm to be available locally. Prefer `link:` for a source checkout; moving or deleting the checkout will break the profile's link.
-
-### 4. Restart and open the manager
-
-Start DSH again and open **Settings → Archived sessions**. A full restart is required for the plugin to capture session lifecycle handles from creation or resume.
-
-To update a linked installation, pull the latest source and fully quit and reopen DSH:
-
-```sh
-git pull --ff-only
-```
-
-To uninstall, fully quit DSH and run the Desktop-installed command:
-
-```sh
-dsh plugin --profile desktop remove dsh-plugin-archived-sessions
-```
-
-Uninstalling does not restore deleted conversations or remove runtime deletion records.
+The npm-distributed `dsh` command cannot manage the `desktop` profile. Keep the checkout in a permanent location because the profile links to it directly. No build or dependency installation is needed inside the plugin directory. Fully restart DSH after installing or changing the source. To update this linked checkout, run `git pull --ff-only` and restart DSH.
 
 ## How it works
 
