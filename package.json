@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-archived-sessions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "归档会话管理：列出、删除与恢复 DSH 已归档的会话 / Manage DSH archived Sessions: list, delete, restore",
   "repository": {
@@ -22,10 +22,12 @@
   "files": [
     "lib/index.js",
     "lib/lifecycle.js",
+    "lib/paths.js",
     "lib/protocol.js",
     "lib/client.js",
     "cordis.patch.yml",
     "README.zh-CN.md",
+    "CHANGELOG.md",
     "THIRD_PARTY_NOTICES.md"
   ],
   "dsh": {
