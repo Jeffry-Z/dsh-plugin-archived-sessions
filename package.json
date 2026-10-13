@@ -1,0 +1,41 @@
+{
+  "name": "dsh-plugin-archived-sessions",
+  "version": "0.1.0",
+  "private": true,
+  "description": "归档会话管理：列出、删除与恢复 DSH 已归档的会话 / Manage DSH archived Sessions: list, delete, restore",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeffry-Z/dsh-plugin-archived-sessions.git"
+  },
+  "homepage": "https://github.com/Jeffry-Z/dsh-plugin-archived-sessions#readme",
+  "bugs": {
+    "url": "https://github.com/Jeffry-Z/dsh-plugin-archived-sessions/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/lifecycle.js",
+    "lib/protocol.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.zh-CN.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": []
+    }
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,13 @@
+# dsh-plugin-archived-sessions — bundle patch layer.
+#
+# Loaded as one profile bundle layer (declared by `dsh.bundle.patch` in
+# package.json). This is the row that actually mounts the plugin; the bundle
+# package name is also recorded in the profile's `dsh.profile.bundles` by the
+# plugin manager.
+#
+# The plugin's browser half is discovered separately, from the same package's
+# `dsh.client` declaration and its `./client` export.
+
+- insert:
+    - id: archived-sessions
+      name: 'dsh-plugin-archived-sessions'
