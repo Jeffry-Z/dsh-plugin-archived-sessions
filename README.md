@@ -47,11 +47,15 @@ Other DSH versions, platforms and persistence backends have not been validated. 
 
 No manual clone, command-line installation or profile editing is needed. A full restart lets the plugin capture session lifecycle handles from creation or resume; closing a conversation or window alone does not necessarily stop its backend.
 
-### Update and uninstall
+### Update
 
 DSH `0.2.0-rc.2` does not automatically update installed plugins. To update, uninstall `dsh-plugin-archived-sessions` from **Plugins**, install it again using the GitHub URL above, enable it, and fully restart DSH.
 
-To remove the plugin, select it in **Plugins** and click **Uninstall**. Uninstalling does not restore deleted conversations or remove runtime deletion records.
+### Uninstall in Desktop
+
+1. Open **DeepSeek Harness Desktop** and select **Plugins** in the sidebar.
+2. Select `dsh-plugin-archived-sessions` from the installed plugins list.
+3. Click **Uninstall** and confirm to complete removal.
 
 ### Install a local checkout for development
 
